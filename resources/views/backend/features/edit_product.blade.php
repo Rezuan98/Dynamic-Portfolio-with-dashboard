@@ -5,7 +5,10 @@
 @section('content')
 <div class="container">
 
-<form >
+<form action="{{route('update.product',[ 'id' => $product->id])}}" enctype="multipart/form-data" method="post">
+   @csrf
+   
+   
     <img style="border:2px solid black;" class="m-2" src="{{ asset('storage/' . $product->product_image) }}" alt="Current Image" width="100" height="80">
 
     <input class="form-control-file m-2" type="file" name="product_image[]" multiple id="product_image">
@@ -65,4 +68,5 @@
  });
  
      </script>
+
 @endsection

@@ -34,32 +34,7 @@ class PortfolioController extends Controller
             }
     
             return redirect()->back();
-    // public function storeProduct(Request $request) {
-    //    dd($request);
-    //     $request->validate([
-          
-    //         'multi_img.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048' // You can adjust the max size and allowed types
-    //     ]);
     
-    //     // Retrieve multiple files from the request
-    //     $images = $request->file('multi_img');
-    
-    //     // Check if any files are uploaded
-    //     if ($images) {
-    //         foreach ($images as $img) {
-    //             // Store each image in the 'public/product_images' directory
-    //             $imagePath = $img->store('product_images', 'public');
-    
-    //             // Insert the image path into the database
-    //             Product::create([
-    //                 'product_name' => $imagePath, // Change the field to the correct column in your database
-    //                 'created_at' => \Carbon\Carbon::now(),
-    //             ]);
-    //         }
-    //     }
-    
-    //     // Redirect after successful upload
-    //     return redirect()->route('dashboard');
     }
     
 public function editProduct($id){
@@ -70,7 +45,7 @@ public function editProduct($id){
 }
 public function updateProduct(Request $request,$id){
 
-    dd($id);
+    
 
     $images = $request->file('product_image');
     if($images)
@@ -83,8 +58,12 @@ public function updateProduct(Request $request,$id){
                 'product_image' => $imagePath,
             ]);
     }
+    $notification = array(
+        'message' => 'Data inserted Successfully',
+         'alert-type' => 'success');
 
-    return redirect()->back();
+    return redirect()->route('add.product')->with($notification);
 
 }
+
     }

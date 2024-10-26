@@ -48,7 +48,7 @@
             <td><img src="{{asset('storage/'.$item->product_image)}}" alt="" width="60px" height="50px"></td>
             <td>
       <a href="{{route('edit.product',['id' => $item->id])}}" class="btn btn-success">Edit  </a>
-      <a href="{{route('delete.product',['id' => $item->id])}}" class="btn btn-danger">delete</a>
+      <a href="{{route('delete.product',['id' => $item->id])}}" class="btn btn-delete">delete</a>
 
             </td>
            
@@ -64,7 +64,7 @@
         if (window.File && window.FileReader && window.FileList && window.Blob) { // check File API supported
             var data = $(this)[0].files; // this file data
             $('#preview_img').empty(); // Clear previous previews
-
+    })
             $.each(data, function(index, file) { // loop through each file
                 if (/(\.|\/)(gif|jpe?g|png|webp)$/i.test(file.type)) { // check supported file type
                     var fRead = new FileReader(); // new filereader
@@ -100,7 +100,32 @@
             alert("Your browser doesn't support File API!"); // if File API is absent
         }
     });
-});
+
 
     </script>
+
+
+<script>
+    $(".btn-delete").click(function(){
+        var form =  $(this).parents("form");
+    })
+Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success"
+      });
+    }
+  });
+
+  </script>
 @endsection
